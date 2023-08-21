@@ -1,14 +1,14 @@
 from flask import Flask, request, jsonify
 
-app = Flask(_name_)
+app = Flask(__name__)
 
 class Numbers:
-    def _init_(self, first, second):
+    def __init__(self, first, second):
         self.first = first
         self.second = second
 
 class Result:
-    def _init_(self, value):
+    def __init__(self, value):
         self.result = value
 
 @app.route("/calculator/greeting", methods=['GET'])
@@ -21,7 +21,7 @@ def add():
     if data and 'first' in data and 'second' in data:
         numbers = Numbers(data['first'], data['second'])
         result = Result(numbers.first + numbers.second)
-        return jsonify(result._dict_)
+        return jsonify(result.__dict__)
     else:
         return jsonify(error="Invalid input data"), 400
 
@@ -31,9 +31,9 @@ def subtract():
     if data and 'first' in data and 'second' in data:
         numbers = Numbers(data['first'], data['second'])
         result = Result(numbers.first - numbers.second)
-        return jsonify(result._dict_)
+        return jsonify(result.__dict__)
     else:
         return jsonify(error="Invalid input data"), 400
 
-if _name_ == '_main_':
+if __name__ == '__main__':
     app.run(port=8080, host='0.0.0.0')
